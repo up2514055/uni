@@ -117,7 +117,7 @@ def test_account():
     my_account.withdrawal(50)
     my_account.withdrawal(100)
 
-#test_account()
+test_account()
 
 class HotelRoom:
     def __init__(self,room_num):
