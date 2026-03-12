@@ -1,6 +1,5 @@
 from tkinter import Tk, Frame, Label, Entry, Button, StringVar
 
-
 class LoginApp:
 
     def __init__(self, login_details):

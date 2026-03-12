@@ -1,12 +1,12 @@
 from tkinter import Tk, Frame, Label, Entry, Button, StringVar
-from sign_up import SignUpWindow, load_login_details, append_login
-
+from sign_up import SignUpWindow, load_login_details
 
 class LoginApp:
+
     def __init__(self):
         self.win = Tk()
         self.win.title("Employee Login")
-        self.win.geometry("300x130")
+        self.win.geometry("300x140")
 
         self.main_frame = Frame(self.win)
         self.main_frame.grid(column=0, row=0)
@@ -16,27 +16,7 @@ class LoginApp:
         self.message = StringVar()
         self.message.set("Enter username and password.")
 
-        # Load from CSV
         self.login_details = load_login_details()
-
-        # OPTIONAL: preload the 4 company users once (first run)
-        self.preload_company_users()
-
-    def preload_company_users(self):
-        # Only add these if they aren't already saved
-        defaults = {
-            "YousefD": "VenterboSS",
-            "SergeiT": "25Operyu",
-            "YemiO": "Idec704",
-            "WinonaS": "IAmMel12"
-        }
-        changed = False
-        for u, p in defaults.items():
-            if u not in self.login_details:
-                append_login(u, p)
-                changed = True
-        if changed:
-            self.login_details = load_login_details()
 
     def run(self):
         self.create_widgets()
@@ -54,14 +34,14 @@ class LoginApp:
         Button(self.main_frame, text="Sign In", command=self.authenticate).grid(column=0, row=3)
         Button(self.main_frame, text="Cancel", command=self.win.destroy).grid(column=1, row=3)
 
-        Button(self.main_frame, text="Sign Up", command=self.open_signup).grid(column=0, row=4, columnspan=2, pady=(5, 0))
+        Button(self.main_frame, text="Sign Up", command=self.open_signup).grid(column=0, row=4, columnspan=2, pady=5)
 
     def refresh_details(self):
         self.login_details = load_login_details()
-        self.message.set("Account created. You can log in now.")
+        self.message.set("Account created. You can log in.")
 
     def open_signup(self):
-        SignUpWindow(self.win, on_close=self.refresh_details)
+        SignUpWindow(self.win, self.refresh_details)
 
     def authenticate(self):
         username = self.username.get().strip()
