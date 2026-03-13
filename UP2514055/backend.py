@@ -41,7 +41,7 @@ class MailboxApp:
         content = str(content)
     # create a unique email ID by counting existing emails and adding 1,
     # so each new email is stored separately and does not overwrite other emails.
-        email_id = str(len(self.emails)) + 1
+        email_id = str(len(self.emails) + 1)
     # store email in dictionary
         self.emails[email_id] = (sender, content)
 
