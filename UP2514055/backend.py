@@ -1,10 +1,10 @@
 class PhotosApp:
     def __init__(self):
         self.photos = 0
-    
+
     def take_photo(self):
         self.photos += 1
-
+        
     def delete_photo(self):
         if self.photos <= 0:
             raise ValueError("No photos to delete")
@@ -20,7 +20,7 @@ class PhotosApp:
         return self.photos
 
     def __str__(self):
-        return f"Photos App - Photos: {self.photos}, Storage Used: {self.calculate_storage_used():2f}GB"
+        return f"Photos App - Photos: {self.photos}, Storage Used: {self.calculate_storage_used():.2f}GB"
     
 def test_photos_app():
     app = PhotosApp()
@@ -41,7 +41,7 @@ class MailboxApp:
         content = str(content)
     # create a unique email ID by counting existing emails and adding 1,
     # so each new email is stored separately and does not overwrite other emails.
-        email_id = len(self.emails) + 1
+        email_id = str(len(self.emails)) + 1
     # store email in dictionary
         self.emails[email_id] = (sender, content)
 
@@ -54,16 +54,16 @@ class MailboxApp:
     # this converts the value from MB to GB
 
     def __str__(self):
-        return f"Mailbox App - Emails: {self.count_emails()}, Storage Used: {self.calculate_storage_used()}MB"
+        return f"Mailbox App - Emails: {self.count_emails()}, Storage Used: {self.calculate_storage_used()}GB"
 
 
 def test_mailbox_app():
     mailbox = MailboxApp()
     print("Before:")
     print(mailbox)
-    mailbox.receive_email("alice@example.com", "Hello")
-    mailbox.receive_email("bob@example.com", "Report attached")
-    mailbox.receive_email("charlie@example.com", "Demo next week")
+    mailbox.receive_email("dylan.mazur@gmail.com", "test test")
+    mailbox.receive_email("bob@gmail.com", "Coursework is due soon")
+    mailbox.receive_email("mustafah@gmail.com", "We have to go gym soon")
     print("After:")
     print(mailbox)
 
@@ -95,11 +95,10 @@ class SmartPhone:
         return self.battery
         
     def charge_battery(self):
-        # can be done better
         if not self.battery_saver_mode:
-             self.battery = int(100)
-        elif self.battery_saver_mode and self.battery < 80:
-             self.battery = int(80)
+            self.battery = int(100)
+        elif self.battery_saver_mode and self.battery <= 80:
+            self.battery = int(80)
         return self.battery
         
     def available_storage(self):
@@ -127,10 +126,14 @@ class SmartPhone:
 
     #GUi need to add - 2% of the battery each time a button is pressed
     def take_photo(self):
+        if self.available_storage() < 24 / 1024:
+            raise ValueError("Not enough storage to take a photo")
         self.use_battery(2)
         self.photos_app.take_photo()
 
     def delete_photo(self):
+        if self.available_storage() <  5 / 1024:
+            raise ValueError("Not enough storage to take a photo")
         self.use_battery(2)
         self.photos_app.delete_photo()
 
@@ -140,7 +143,7 @@ class SmartPhone:
     
 def test_smartphone():
     phone = SmartPhone(512)
-    phone.use_battery(10)
+    phone.use_battery(30)
     print(phone)
     phone.battery_saver_mode = True
     phone.charge_battery()
