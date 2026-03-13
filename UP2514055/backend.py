@@ -102,6 +102,7 @@ class SmartPhone:
         return self.battery
         
     def available_storage(self):
+        self.use_battery(2)
         used = self.photos_app.calculate_storage_used() + self.mailbox_app.calculate_storage_used()
         return self.storage_capacity - used
     
@@ -128,17 +129,16 @@ class SmartPhone:
     def take_photo(self):
         if self.available_storage() < 24 / 1024:
             raise ValueError("Not enough storage to take a photo")
-        self.use_battery(2)
         self.photos_app.take_photo()
 
     def delete_photo(self):
         if self.available_storage() <  5 / 1024:
             raise ValueError("Not enough storage to take a photo")
-        self.use_battery(2)
         self.photos_app.delete_photo()
 
     def receive_email(self, sender, content):
-        self.use_battery(2)
+        if self.available_storage() < 5 / 1024:
+            raise ValueError("Error, Not enough storage to recieve an email")
         self.mailbox_app.receive_email(sender, content)
 
     
