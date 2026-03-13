@@ -102,7 +102,6 @@ class SmartPhone:
         return self.battery
         
     def available_storage(self):
-        self.use_battery(2)
         used = self.photos_app.calculate_storage_used() + self.mailbox_app.calculate_storage_used()
         return self.storage_capacity - used
     
