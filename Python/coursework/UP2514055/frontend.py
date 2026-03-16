@@ -15,7 +15,8 @@ class SmartphoneGUI:
         self.storage_capacity_var = StringVar(value = f"{self.smartphone.storage_capacity}GB")
         self.battery_used_var = StringVar(value = f"{self.smartphone.battery}%")
         self.battery_saver_var = StringVar(value = "Disabled")
-        self.storage_left_var = StringVar(value = f"{self.smartphone.available_storage()}GB")
+        used = self.smartphone.photos_app.calculate_storage_used() + self.smartphone.mailbox_app.calculate_storage_used()
+        self.storage_left_var = StringVar(value=f"{self.smartphone.storage_capacity - used:.2f}GB")
         self.number_photos_var = StringVar(value = f"{self.photos_app.num_photos()}")
         self.storage_used_photos_var = StringVar(value = f"{self.photos_app.calculate_storage_used()}")
         self.number_emails_var = StringVar(value = f"{self.mailbox_app.count_emails()}")
@@ -105,7 +106,8 @@ class SmartphoneGUI:
             self.battery_used_var.set(f"{self.smartphone.battery}%")
             self.number_photos_var.set(str(self.smartphone.photos_app.num_photos()))
             self.storage_used_photos_var.set(f"{self.smartphone.photos_app.calculate_storage_used():.2f}GB")
-            self.storage_left_var.set(f"{self.smartphone.available_storage():.2f}GB")
+            used = self.smartphone.photos_app.calculate_storage_used() + self.smartphone.mailbox_app.calculate_storage_used()
+            self.storage_left_var.set(f"{self.smartphone.storage_capacity - used:.2f}GB")
 
         except Exception as e:
             messagebox.showerror("Error", str(e))
@@ -116,9 +118,8 @@ class SmartphoneGUI:
             self.battery_used_var.set(f"{self.smartphone.battery}%")
             self.number_photos_var.set(str(self.smartphone.photos_app.num_photos()))
             self.storage_used_photos_var.set(f"{self.smartphone.photos_app.calculate_storage_used():.2f}GB")
-            self.storage_left_var.set(f"{self.smartphone.available_storage():.2f}GB")
-            #creates an error message box to show that if there are no photos available to delete it will bring up the error message
-
+            used = self.smartphone.photos_app.calculate_storage_used() + self.smartphone.mailbox_app.calculate_storage_used()
+            self.storage_left_var.set(f"{self.smartphone.storage_capacity - used:.2f}GB")
         except Exception as e:
             messagebox.showerror("Error", str(e))
 
@@ -127,15 +128,11 @@ class SmartphoneGUI:
             sender = self.sender_var.get()
             content = self.content_var.get()
             self.smartphone.receive_email(sender, content)
-
             self.battery_used_var.set(f"{self.smartphone.battery}%")
-            self.number_emails_var.set(
-            str(self.smartphone.mailbox_app.count_emails()))
-            self.storage_used_var.set(
-            f"{self.smartphone.mailbox_app.calculate_storage_used():.4f}GB")
-            self.storage_left_var.set(
-            f"{self.smartphone.available_storage():.2f}GB")
-
+            self.number_emails_var.set(str(self.smartphone.mailbox_app.count_emails()))
+            self.storage_used_var.set(f"{self.smartphone.mailbox_app.calculate_storage_used():.4f}GB")
+            used = self.smartphone.photos_app.calculate_storage_used() + self.smartphone.mailbox_app.calculate_storage_used()
+            self.storage_left_var.set(f"{self.smartphone.storage_capacity - used:.2f}GB")
         except Exception as e:
             messagebox.showerror("Error", str(e))
 

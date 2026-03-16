@@ -114,8 +114,6 @@ class SmartPhone:
         return self.battery_saver_mode
     
     def __str__(self):
-
-    # convert boolean to string here
         if self.battery_saver_mode:
             saver = "Enabled"
         else:
@@ -125,18 +123,27 @@ class SmartPhone:
     
     #GUI need to add - 2% of the battery each time a button is pressed
     def take_photo(self):
+        if self.battery < 4:
+            raise ValueError("Not enough battery to take a photo")
         if self.available_storage() < 24 / 1024:
             raise ValueError("Not enough storage to take a photo")
+        self.use_battery(2)
         self.photos_app.take_photo()
 
     def delete_photo(self):
-        if self.available_storage() <  5 / 1024:
-            raise ValueError("Not enough storage to take a photo")
+        if self.battery < 4:
+            raise ValueError("Not enough battery to delete a photo")
+        if self.available_storage() < 5 / 1024:
+            raise ValueError("Not enough storage to delete a photo")
+        self.use_battery(2)  
         self.photos_app.delete_photo()
 
     def receive_email(self, sender, content):
+        if self.battery < 4:
+            raise ValueError("Not enough battery to receive an email")
         if self.available_storage() < 5 / 1024:
-            raise ValueError("Error, Not enough storage to recieve an email")
+            raise ValueError("Not enough storage to receive an email")
+        self.use_battery(2)
         self.mailbox_app.receive_email(sender, content)
 
     
