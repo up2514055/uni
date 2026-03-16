@@ -91,7 +91,6 @@ class SmartPhone:
         self.battery -= amount
         if self.battery < 0:
             self.battery = 0
-
         return self.battery
         
     def charge_battery(self):
@@ -124,8 +123,7 @@ class SmartPhone:
 
         return f"BnL Smartphone - Storage: {self.storage_capacity}GB, Battery: {self.battery}%, Battery Saver Mode: {saver}"
     
-
-    #GUi need to add - 2% of the battery each time a button is pressed
+    #GUI need to add - 2% of the battery each time a button is pressed
     def take_photo(self):
         if self.available_storage() < 24 / 1024:
             raise ValueError("Not enough storage to take a photo")
