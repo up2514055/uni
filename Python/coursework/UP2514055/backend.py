@@ -39,9 +39,8 @@ class MailboxApp:
     def receive_email(self, sender, content):
         sender = str(sender)
         content = str(content)
-        email_id = str(len(self.emails) + 1)
     # store email in dictionary
-        self.emails[email_id] = (sender, content)
+        self.emails[sender] = content
 
     def count_emails(self):
         return len(self.emails)
@@ -52,7 +51,7 @@ class MailboxApp:
     # this converts the value from MB to GB
 
     def __str__(self):
-        return f"Mailbox App - Emails: {self.count_emails()}, Storage Used: {self.calculate_storage_used()}GB"
+        return f"Mailbox App - Emails: {self.count_emails()}, Storage Used: {self.calculate_storage_used()}GB, {self.emails}"
 
 
 def test_mailbox_app():
@@ -60,12 +59,13 @@ def test_mailbox_app():
     print("Before:")
     print(mailbox)
     mailbox.receive_email("dylan.mazur@gmail.com", "test test")
+    mailbox.receive_email("dylan.mazur@gmail.com", "test")
     mailbox.receive_email("bob@gmail.com", "Coursework is due soon")
     mailbox.receive_email("mustafah@gmail.com", "We have to go gym soon")
     print("After:")
     print(mailbox)
 
-#test_mailbox_app()
+test_mailbox_app()
 
 class SmartPhone:
     
