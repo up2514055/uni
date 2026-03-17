@@ -11,7 +11,7 @@ void main() {
   // print(circumferenceOfCircl2(20));
   // circleInfo();
   // displayBurgerOrder(3, 9.99);
-  print(howManyBurgers(10, 25));
+  // print(howManyBurgers(10, 25));
 }
 
 void sayName() {
