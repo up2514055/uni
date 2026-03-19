@@ -23,7 +23,7 @@ void burgerOrder() {
   String? input = stdin.readLineSync();
   double moneyWillingToSpend = double.parse(input!);
 
-  double pricePerBurger = 2.50;
+  double pricePerBurger = 9.99;
 
   int burgers = howManyBurgers(pricePerBurger, moneyWillingToSpend);
 
