@@ -1,0 +1,18 @@
+==============================
+Initial input: hello
+Shift:         1
+Encrypted:     ifmmp
+==============================
+
+==============================
+Initial Input: hello
+Shift Value:         2
+Encrypted Message:     jgnnq
+==============================
+
+==============================
+Initial Input:    hello
+Shift Value:  1
+Encrypted Message:    ifmmp
+==============================
+
