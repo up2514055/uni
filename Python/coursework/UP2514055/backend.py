@@ -51,7 +51,7 @@ class MailboxApp:
     # this converts the value from MB to GB
 
     def __str__(self):
-        return f"Mailbox App - Emails: {self.count_emails()}, Storage Used: {self.calculate_storage_used()}GB, {self.emails}"
+        return f"Mailbox App - Emails: {self.count_emails()}, Storage Used: {self.calculate_storage_used()}GB"
 
 
 def test_mailbox_app():
@@ -65,7 +65,7 @@ def test_mailbox_app():
     print("After:")
     print(mailbox)
 
-test_mailbox_app()
+#test_mailbox_app()
 
 class SmartPhone:
     
