@@ -19,13 +19,9 @@ int howManyBurgers(double priceOfBurger, double moneyUserHas) {
 
 void burgerOrder() {
   print("How much money are you willing to spend?");
-  
   String? input = stdin.readLineSync();
   double moneyWillingToSpend = double.parse(input!);
-
   double pricePerBurger = 9.99;
-
   int burgers = howManyBurgers(pricePerBurger, moneyWillingToSpend);
-
   displayBurgerOrder(burgers, pricePerBurger);
 }
