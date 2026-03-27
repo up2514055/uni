@@ -37,16 +37,16 @@ class MailboxApp:
         self.emails = {}
 
     def receive_email(self, sender, content):
-        sender = str(sender)
-        content = str(content)
-    # store email in dictionary
-        self.emails[sender] = content
+        if sender not in self.emails:
+            self.emails[sender] = []
+        self.emails[sender].append(content)
 
     def count_emails(self):
-        return len(self.emails)
+        return sum(len(contents) for contents in self.emails.values())
     
     def calculate_storage_used(self):
-        storage_mb = len(self.emails) * 5
+        total_emails = sum(len(contents) for contents in self.emails.values())
+        storage_mb = total_emails * 5
         return storage_mb / 1024
     # this converts the value from MB to GB
 
