@@ -7,8 +7,8 @@ void main() {
   // heartMonitor(81, 200);
   // basicCalculator(2, 2, "+");
   // print(isPrime(4));
-  //customisedGreeting(1000);
-  print(gcd(2, 2));
+  // customisedGreeting(1000);
+  // print(gcd(2, 2));
 }
 
 void maxNumber(int num1, int num2) {

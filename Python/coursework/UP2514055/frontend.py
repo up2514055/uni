@@ -127,26 +127,13 @@ class SmartphoneGUI:
         try:
             sender = self.sender_var.get()
             content = self.content_var.get()
-        
             #validation to ensure that the boxes are not left empty
-
-            error = ValueError("Please enter a valid email address")
-            
-            if sender.strip() == "" or sender == "Write the sender here":
+            if sender == "" or sender == "Write the sender here":
                 raise ValueError("Please enter a sender")
-            
-            if " " in sender:
-                raise error
-            
-            if "." not in sender:
-                raise error
-
             if "@" not in sender:
-                raise error
-            
-            if content.strip() == "" or content == "Write the content here":
+                raise ValueError("Please enter a valid email address")
+            if content == "" or content == "Write the content here":
                 raise ValueError("Please enter content")
-            
             self.smartphone.receive_email(sender, content)
             self.battery_used_var.set(f"{self.smartphone.battery}%")
             self.number_emails_var.set(str(self.smartphone.mailbox_app.count_emails()))
