@@ -4,11 +4,9 @@ def encrypt(message, shift):
         if char.isalpha():
             shifted = ord(char) + shift
             if char.islower():
-                if shifted > ord('z'):
-                    shifted -= 26
+                    shifted = (ord(char) - ord('a') + shift) % 26 + ord('a')
             elif char.isupper():
-                if shifted > ord('Z'):
-                    shifted -= 26
+                shifted = (ord(char) - ord('A') + shift) % 26 + ord('A')
             result += chr(shifted)
         else:
             result += char

@@ -1,18 +1,24 @@
 ==============================
-Initial input: hello
-Shift:         1
-Encrypted:     ifmmp
+Initial Input: dylan
+Shift Value:  2
+Encrypted Message: fancp
 ==============================
 
 ==============================
-Initial Input: hello
-Shift Value:         2
-Encrypted Message:     jgnnq
+Initial Input: dylan
+Shift Value:  2
+Encrypted Message: fancp
 ==============================
 
 ==============================
-Initial Input:    hello
-Shift Value:  1
-Encrypted Message:    ifmmp
+Initial Input: dylan
+Shift Value:  2
+Encrypted Message: fancp
+==============================
+
+==============================
+Initial Input: dylan
+Shift Value:  2
+Encrypted Message: fancp
 ==============================
 
