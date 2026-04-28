@@ -1,65 +1,76 @@
 void main() {
-  Motorcycle motor = Motorcycle("red", 10);
-  print(motor.colour);
-  print(motor.speed);
-  motor.speed = 15;
-  print(motor.speed);
-  print(motor);
-  /////////////////
-  BankAccount bank = BankAccount('Dylan');
-  bank._balance = 100;
-  print(bank._balance);
-  String sugar = Ingredient('Sugar', calories)
+  Car myCar = Car('red', 10.0);
+  print(myCar.colour);
+  print(myCar.speed);
+  myCar.colour = 'blue';
+  print(myCar.colour);
+
+  myCar.accelerate(10);
+  print(myCar.speed);
+  myCar.brake();
+  print(myCar.speed);
+  print(myCar);
+
+  Ingredient pasta = Ingredient('Pasta', 200);
+  Ingredient sauce = Ingredient('Sauce', 100);
+  Recipe pastaRecipe = Recipe('Pasta');
+  pastaRecipe.addIngredient(pasta);
+  pastaRecipe.addIngredient(sauce);
+  print(pastaRecipe.ingredients);
+  print(pastaRecipe.totalCalories());
+  print(pastaRecipe);
+
+  KidsMeal happyMeal = KidsMeal('Cheeseburger', 'Slimer');
+  happyMeal.toy = 'Ectomobile';
+  print(happyMeal.toy); // Ectomobile
+  Meal meal = Meal('Big Mac');
+  print(meal); // Big Mac, chips and drink
+  print(happyMeal); // Cheeseburger, chips and drink plus a Ectomobile
 }
 
 class Car {
-  String colour = '';
-  double speed = 0.0;
-  //instance variables are seen as above
-
-  Car(String inputColour, double inputSpeed) {
-    colour = inputColour;
-    speed = inputSpeed;
-  }
-}
-//constructors are used to initalise objects they can accept parameters too
-//constuctors have the same name as the class
-//need to use "this" to distigush them from paramters as seen below
-
-class Bike {
-  String colour = '';
-  double speed = 0.0;
-
-  Bike(String colour, double speed) {
-    this.colour = colour;
-    this.speed = speed;
-  }
-}
-
-class Motorcycle {
   String colour;
   double speed;
 
-  Motorcycle(this.colour, this.speed);
+  Car(this.colour, this.speed);
+
+  void accelerate(double inc) {
+    speed += inc;
+  }
+
+  void brake() {
+    speed = 0;
+  }
 
   String toString() {
-    return 'Motorcycle(colour: $colour, speed: $speed)';
+    return 'Car(colour: $colour, speed: $speed)';
   }
 }
-//instance varibles to be assingedto the values passed into the constructor
-//Using an _ makes private instance vairables like python as seen below
 
 class BankAccount {
   String owner;
   double _balance = 0.0;
 
-  // Constructor
   BankAccount(this.owner);
 
-  // Getter
+  void deposit(double amount) => _balance += amount;
+
+  void withdraw(double amount) {
+    if (_balance - amount >= 0) {
+      _balance -= amount;
+    }
+  }
+
+  // Not needed anymore as we have balance getter and setter below
+  // double getBalance() => _balance;
+
+  // double get balance {
+  //   return _balance;
+  // }
+
+  // Getter using arrow syntax
   double get balance => _balance;
 
-  // Setter
   void set balance(double amount) {
     if (amount >= 0) {
       _balance = amount;
@@ -71,8 +82,8 @@ class Ingredient {
   String name;
   int calories;
 
-  //constructor
   Ingredient(this.name, this.calories);
+
   String toString() => '$name ($calories calories)';
 }
 
@@ -82,18 +93,50 @@ class Recipe {
 
   Recipe(this.name);
 
-  String toString() => 'name: $ingredients';
+  // String toString() => '$name: $ingredients';
+
+  String toString() {
+    String result = '$name\n';
+    for (Ingredient ingredient in ingredients) {
+      result += '  $ingredient\n';
+    }
+    result += 'Total calories: ${totalCalories()}';
+    return result;
+  }
+
+  void addIngredient(Ingredient ingredient) {
+    ingredients.add(ingredient);
+  }
+
+  int totalCalories() {
+    int total = 0;
+    for (Ingredient ingredient in ingredients) {
+      total += ingredient.calories;
+    }
+    return total;
+  }
 }
-//to use inheritence in dart we use the exstends keyword as seen below
+
 class Meal {
   String burger;
 
   Meal(this.burger);
+
+  String toString() {
+    return '$burger, chips and drink';
+  }
 }
 
-class KidsMeal extends Meal{
-  String toy = '';
-  KidsMeal(String burger) : super(burger){
+class KidsMeal extends Meal {
+  String toy = 'unknown';
+
+  // KidsMeal(String burger, this.toy) : super(burger);
+
+  KidsMeal(String burger, String toy) : super(burger) {
     this.toy = toy;
+  }
+
+  String toString() {
+    return '${super.toString()} plus a $toy';
   }
 }
