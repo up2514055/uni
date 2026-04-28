@@ -46,7 +46,7 @@ void main() {
   // stdout.write("Enter a word:");
   // String? input = stdin.readLineSync();
   // print(capitalize(input));
-  var post = ['I love programming #cool'];
+  List<String> post = ['I love programming #cool, #yay'];
   print(extractHashtags(post));
 }
 
