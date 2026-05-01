@@ -1,7 +1,13 @@
 void main() {
   SocialMediaFeed feed = SocialMediaFeed();
   Post p1 = Post('Gym', 'Dylan', 01052026);
+  Post p2 = Post('Uni', 'Dylan', 01052026);
   feed.addPost(p1);
+  feed.addPost(p2);
+  feed.likePost(p1);
+  feed.displayFeed();
+  feed.likePost(p2);
+  feed.removePost(p1);
   feed.displayFeed();
 }
 
