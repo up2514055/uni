@@ -80,7 +80,7 @@ class Student extends Person {
   String greet() => 'Hello, $name!';
 
   String get phoneNumber {
-    String lastFourDigits = _phoneNumber!.substring(6);
+    String lastFourDigits = _phoneNumber.substring(6);
     return '***-***-$lastFourDigits';
   }
 
